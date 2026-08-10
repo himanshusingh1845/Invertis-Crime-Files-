@@ -804,7 +804,7 @@
     // =========================================
 
     const API_URL =
-        "http://localhost:5000";
+"https://invertis-crime-files-backend.onrender.com/api/cases";
 
 
     // =========================================
@@ -929,10 +929,10 @@
 
         try {
 
-            const response =
-                await fetch(
-                    `${API_URL}/api/cases`
-                );
+           const response =
+    await fetch(
+        API_URL
+    );
 
 
             if (!response.ok) {
@@ -1171,23 +1171,20 @@
 
 
                 let url =
-                    `${API_URL}/api/cases`;
+    `${API_URL}`;
 
-                let method =
-                    "POST";
-
+let method =
+    "POST";
 
                 // UPDATE
+if (editingCaseId) {
 
-                if (editingCaseId) {
+    url =
+        `${API_URL}/${editingCaseId}`;
 
-                    url =
-                        `${API_URL}/api/cases/${editingCaseId}`;
-
-                    method =
-                        "PUT";
-
-                }
+    method =
+        "PUT";
+}
 
 
                 const response =
@@ -1282,12 +1279,10 @@
 
         try {
 
-            const response =
-                await fetch(
-                    `${API_URL}/api/cases/${caseId}`
-                );
-
-
+           const response =
+    await fetch(
+        `${API_URL}/${caseId}`
+    );
             const item =
                 await response.json();
 
@@ -1440,105 +1435,76 @@
     }
 
 
-    // =========================================
-    // DELETE CASE
-    // =========================================
 
-    async function deleteCase(caseId) {
+// DELETE CASE
 
-        const confirmed =
-            confirm(
-                `Are you sure you want to delete case ${caseId}?`
-            );
+// =========================================
+// DELETE CASE
+// =========================================
 
+async function deleteCase(caseId) {
 
-        if (!confirmed) {
-            return;
-        }
+    const confirmed =
+        confirm(
+            `Are you sure you want to delete case ${caseId}?`
+        );
 
+    if (!confirmed) {
+        return;
+    }
 
-        try {
+    try {
 
-            const response =
-                await fetch(
-                    `${API_URL}/api/cases/${caseId}`,
-                    {
+        const response =
+            await fetch(
+                `${API_URL}/${caseId}`,
+                {
 
-                        method: "DELETE",
+                    method: "DELETE",
 
-                        headers: {
+                    headers: {
 
-                            "Authorization":
-                                `Bearer ${token}`
-
-                        }
+                        "Authorization":
+                            `Bearer ${token}`
 
                     }
-                );
 
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    "Delete failed"
-                );
-
-            }
-
-
-            showMessage(
-                "Case deleted successfully.",
-                "success"
+                }
             );
 
+        const data =
+            await response.json();
 
-            loadCases();
+        if (!response.ok) {
 
-        }
-
-        catch (error) {
-
-            console.error(error);
-
-            showMessage(
-                error.message,
-                "error"
+            throw new Error(
+                data.message ||
+                "Delete failed"
             );
 
         }
 
-    }
-
-
-    // =========================================
-    // LOGOUT
-    // =========================================
-
-    function logout() {
-
-        localStorage.removeItem(
-            "adminToken"
+        showMessage(
+            "Case deleted successfully.",
+            "success"
         );
 
-        localStorage.removeItem(
-            "adminUsername"
-        );
-
-        window.location.href =
-            "admin.html";
+        loadCases();
 
     }
 
+    catch (error) {
 
-    // =========================================
-    // HTML ESCAPE
-    // =========================================
+        console.error(error);
 
+        showMessage(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
     function escapeHTML(value) {
 
         if (value === null ||
