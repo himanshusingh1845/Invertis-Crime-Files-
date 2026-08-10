@@ -2,26 +2,18 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Forensic Crime Files</title>
 
     <meta name="description"
-          content="Invertis Crime Files - Browse publicly available crime cases and investigations.">
+        content="Invertis Crime Files - Browse publicly available crime cases and investigations.">
 
     <meta name="google-site-verification"
-          content="9N06cCJat_LAQY7F1xGzMI4B3YCXuk-0M8BkG5q_1wM">
+        content="9N06cCJat_LAQY7F1xGzMI4B3YCXuk-0M8BkG5q_1wM">
 
     <style>
-
-        /* =========================
-           BASIC
-        ========================= */
-
         * {
             margin: 0;
             padding: 0;
@@ -38,11 +30,6 @@
             color: white;
             line-height: 1.6;
         }
-
-
-        /* =========================
-           NAVBAR
-        ========================= */
 
         header {
             position: sticky;
@@ -69,16 +56,12 @@
             color: white;
             text-decoration: none;
             margin-left: 22px;
+            transition: 0.2s;
         }
 
         nav a:hover {
             color: #e63946;
         }
-
-
-        /* =========================
-           HERO
-        ========================= */
 
         .hero {
             min-height: 500px;
@@ -91,8 +74,8 @@
 
             background:
                 linear-gradient(
-                    rgba(0,0,0,0.75),
-                    rgba(0,0,0,0.88)
+                    rgba(0, 0, 0, 0.75),
+                    rgba(0, 0, 0, 0.88)
                 ),
                 url("https://cdn.altahonos.com/santaj_yapan_birini_sikayet_etmek_f071f874a2.png");
 
@@ -122,11 +105,6 @@
             min-height: 30px;
         }
 
-
-        /* =========================
-           SEARCH
-        ========================= */
-
         #search {
             width: 80%;
             max-width: 650px;
@@ -137,10 +115,9 @@
             border: 1px solid #555;
             border-radius: 30px;
 
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
 
             color: white;
-
             outline: none;
 
             font-size: 15px;
@@ -154,11 +131,6 @@
             border-color: #e63946;
         }
 
-
-        /* =========================
-           SEARCH RESULTS
-        ========================= */
-
         #searchResults {
             width: 80%;
             max-width: 650px;
@@ -168,7 +140,6 @@
             text-align: left;
 
             position: relative;
-
             z-index: 200;
         }
 
@@ -176,39 +147,30 @@
             background: #171717;
 
             border: 1px solid #333;
-
             border-radius: 10px;
 
             padding: 14px 18px;
-
             margin-bottom: 8px;
 
             cursor: pointer;
-
             transition: 0.2s;
         }
 
         .search-result:hover {
             border-color: #e63946;
-
             transform: translateY(-2px);
-
             background: #1d1d1d;
         }
 
         .search-result-title {
             color: white;
-
             font-weight: bold;
-
             font-size: 16px;
         }
 
         .search-result-meta {
             color: #888;
-
             font-size: 13px;
-
             margin-top: 4px;
         }
 
@@ -218,44 +180,30 @@
             background: #171717;
 
             border: 1px solid #333;
-
             border-radius: 10px;
 
             padding: 14px 18px;
         }
-
-
-        /* =========================
-           COMMON SECTION
-        ========================= */
 
         .section {
             width: 90%;
             max-width: 1200px;
 
             margin: auto;
-
             padding: 70px 0;
         }
 
         .section h2 {
             text-align: center;
-
             font-size: 32px;
         }
 
         .section-text {
             text-align: center;
-
             color: #aaa;
 
             margin: 8px 0 35px;
         }
-
-
-        /* =========================
-           CRIME CATEGORIES
-        ========================= */
 
         .category-container {
             display: grid;
@@ -270,13 +218,11 @@
             background: #171717;
 
             border: 1px solid #292929;
-
             border-radius: 12px;
 
             padding: 28px;
 
             cursor: pointer;
-
             transition: 0.3s;
         }
 
@@ -287,7 +233,7 @@
 
             box-shadow:
                 0 10px 30px
-                rgba(230,57,70,0.12);
+                rgba(230, 57, 70, 0.12);
         }
 
         .category-icon {
@@ -300,26 +246,18 @@
 
         .category-card p {
             color: #999;
-
             font-size: 14px;
         }
-
-
-        /* =========================
-           NATIONAL / INTERNATIONAL
-        ========================= */
 
         .region-section {
             display: none;
 
             margin-top: 40px;
-
             padding: 30px;
 
             background: #111;
 
             border: 1px solid #292929;
-
             border-radius: 12px;
         }
 
@@ -352,19 +290,16 @@
             background: #171717;
 
             border: 1px solid #292929;
-
             border-radius: 12px;
 
             text-align: center;
 
             cursor: pointer;
-
             transition: 0.3s;
         }
 
         .region-card:hover {
             transform: translateY(-5px);
-
             border-color: #e63946;
         }
 
@@ -378,18 +313,11 @@
 
         .region-card p {
             color: #999;
-
             font-size: 14px;
         }
 
-
-        /* =========================
-           TRENDING
-        ========================= */
-
         .trending-section {
             background: #111;
-
             border-top: 1px solid #292929;
         }
 
@@ -401,7 +329,6 @@
             background: #171717;
 
             border: 1px solid #292929;
-
             border-radius: 12px;
 
             padding: 25px;
@@ -425,7 +352,6 @@
 
         .trending-list li:hover {
             color: #e63946;
-
             padding-left: 15px;
         }
 
@@ -439,14 +365,8 @@
 
         .trending-meta {
             color: #888;
-
             font-size: 13px;
         }
-
-
-        /* =========================
-           MODAL
-        ========================= */
 
         .modal {
             display: none;
@@ -461,8 +381,7 @@
             width: 100%;
             height: 100%;
 
-            background:
-                rgba(0,0,0,0.88);
+            background: rgba(0, 0, 0, 0.88);
 
             overflow-y: auto;
         }
@@ -478,7 +397,6 @@
             background: #171717;
 
             border: 1px solid #333;
-
             border-radius: 12px;
 
             position: relative;
@@ -503,13 +421,11 @@
 
         .modal-content h2 {
             color: #e63946;
-
             margin-bottom: 20px;
         }
 
         .detail {
             margin: 12px 0;
-
             color: #ccc;
         }
 
@@ -527,35 +443,20 @@
 
         .detail-section h3 {
             color: #e63946;
-
             margin-bottom: 8px;
         }
 
-
-        /* =========================
-           LOADING / ERROR
-        ========================= */
-
         .loading {
             text-align: center;
-
             color: #aaa;
-
             padding: 35px;
         }
 
         .error {
             text-align: center;
-
             color: #ff6b6b;
-
             padding: 35px;
         }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
 
         footer {
             text-align: center;
@@ -569,7 +470,6 @@
 
         footer h3 {
             color: #e63946;
-
             margin-bottom: 10px;
         }
 
@@ -579,20 +479,12 @@
 
         .copyright {
             margin-top: 15px;
-
             font-size: 13px;
         }
 
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
         @media (max-width: 850px) {
-
             header {
                 flex-direction: column;
-
                 gap: 12px;
             }
 
@@ -608,12 +500,9 @@
                 grid-template-columns:
                     repeat(2, 1fr);
             }
-
         }
 
-
         @media (max-width: 550px) {
-
             .hero h1 {
                 font-size: 32px;
             }
@@ -634,20 +523,11 @@
             .region-container {
                 grid-template-columns: 1fr;
             }
-
         }
-
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- =========================
-         NAVBAR
-    ========================= -->
 
     <header>
 
@@ -656,10 +536,7 @@
         </div>
 
         <nav>
-
-            <a href="#home">
-                Home
-            </a>
+            <a href="#home">Home</a>
 
             <a href="#categories">
                 Crime Categories
@@ -670,23 +547,14 @@
             </a>
 
             <a href="admin.html"
-               style="color:#e63946; font-weight:bold;">
+                style="color:#e63946; font-weight:bold;">
                 Admin Login
             </a>
-
         </nav>
 
     </header>
 
-
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
-    <section
-        class="hero"
-        id="home">
+    <section class="hero" id="home">
 
         <div class="hero-content">
 
@@ -700,18 +568,11 @@
 
             <p id="typing"></p>
 
-
-            <!-- SEARCH -->
-
             <input
                 type="text"
                 id="search"
                 placeholder="Search crime cases..."
-                autocomplete="off"
-            >
-
-
-            <!-- SEARCH RESULTS -->
+                autocomplete="off">
 
             <div id="searchResults"></div>
 
@@ -719,15 +580,7 @@
 
     </section>
 
-
-
-    <!-- =========================
-         CRIME CATEGORIES
-    ========================= -->
-
-    <section
-        class="section"
-        id="categories">
+    <section class="section" id="categories">
 
         <h2>
             Crime Categories
@@ -738,11 +591,7 @@
             and International cases.
         </p>
 
-
         <div class="category-container">
-
-
-            <!-- MURDER -->
 
             <div
                 class="category-card"
@@ -762,9 +611,6 @@
 
             </div>
 
-
-            <!-- RAPE -->
-
             <div
                 class="category-card"
                 onclick="openCategory('Rape')">
@@ -782,9 +628,6 @@
                 </p>
 
             </div>
-
-
-            <!-- THEFT -->
 
             <div
                 class="category-card"
@@ -804,9 +647,6 @@
 
             </div>
 
-
-            <!-- SUICIDE -->
-
             <div
                 class="category-card"
                 onclick="openCategory('Suicide')">
@@ -825,9 +665,6 @@
 
             </div>
 
-
-            <!-- CHILD ABUSE -->
-
             <div
                 class="category-card"
                 onclick="openCategory('Child Abuse')">
@@ -845,9 +682,6 @@
                 </p>
 
             </div>
-
-
-            <!-- UNSOLVED -->
 
             <div
                 class="category-card"
@@ -869,12 +703,6 @@
 
         </div>
 
-
-
-        <!-- =========================
-             NATIONAL / INTERNATIONAL
-        ========================== -->
-
         <div
             class="region-section"
             id="regionSection">
@@ -882,16 +710,10 @@
             <h3
                 class="region-title"
                 id="regionTitle">
-
                 Select Region
-
             </h3>
 
-
             <div class="region-container">
-
-
-                <!-- NATIONAL -->
 
                 <div
                     class="region-card"
@@ -910,9 +732,6 @@
                     </p>
 
                 </div>
-
-
-                <!-- INTERNATIONAL -->
 
                 <div
                     class="region-card"
@@ -938,12 +757,6 @@
 
     </section>
 
-
-
-    <!-- =========================
-         TRENDING CASES
-    ========================= -->
-
     <section
         class="section trending-section"
         id="trending">
@@ -955,7 +768,6 @@
         <p class="section-text">
             Explore the most recently added cases.
         </p>
-
 
         <div class="trending-box">
 
@@ -973,12 +785,6 @@
 
     </section>
 
-
-
-    <!-- =========================
-         CASE MODAL
-    ========================= -->
-
     <div
         class="modal"
         id="caseModal">
@@ -993,20 +799,11 @@
 
             </span>
 
-
-            <div id="caseDetails">
-
-            </div>
+            <div id="caseDetails"></div>
 
         </div>
 
     </div>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
 
     <footer>
 
@@ -1020,41 +817,23 @@
         </p>
 
         <p class="copyright">
-            © Forensic Crime Files
+            © 2026 Forensic Crime Files
         </p>
 
         <p>
             Designed and Developed by
-            <strong>Himanshuu Singh</strong>
+            <strong>Himanshu Singh</strong>
         </p>
 
     </footer>
 
-
-
     <script>
-
-
-        /* ==========================================
-           BACKEND API
-        ========================================== */
 
         const API_URL =
             "https://invertis-crime-files-backend.onrender.com/api/cases";
 
-
-        /* ==========================================
-           VARIABLES
-        ========================================== */
-
         let cases = [];
-
         let selectedCategory = "";
-
-
-        /* ==========================================
-           ELEMENTS
-        ========================================== */
 
         const searchBox =
             document.getElementById("search");
@@ -1071,27 +850,17 @@
         const regionTitle =
             document.getElementById("regionTitle");
 
-
-        /* ==========================================
-           TYPING EFFECT
-        ========================================== */
-
         const typingText =
             "Explore Public Crime Records & Investigations";
 
         let typingIndex = 0;
-
 
         function typingEffect() {
 
             const typing =
                 document.getElementById("typing");
 
-
-            if (
-                typingIndex <
-                typingText.length
-            ) {
+            if (typingIndex < typingText.length) {
 
                 typing.textContent +=
                     typingText[typingIndex];
@@ -1102,18 +871,10 @@
                     typingEffect,
                     60
                 );
-
             }
-
         }
 
-
         typingEffect();
-
-
-        /* ==========================================
-           GET ALL CASES
-        ========================================== */
 
         async function fetchCases() {
 
@@ -1124,16 +885,13 @@
                     API_URL
                 );
 
-
                 const response =
                     await fetch(API_URL);
-
 
                 console.log(
                     "Server response:",
                     response.status
                 );
-
 
                 if (!response.ok) {
 
@@ -1141,110 +899,72 @@
                         "Server returned " +
                         response.status
                     );
-
                 }
-
 
                 const data =
                     await response.json();
-
 
                 console.log(
                     "Cases received:",
                     data
                 );
 
-
                 if (!Array.isArray(data)) {
 
                     throw new Error(
                         "Backend did not return a case list."
                     );
-
                 }
 
-
                 cases = data;
-
 
                 console.log(
                     "Total cases:",
                     cases.length
                 );
 
-
                 displayTrending(cases);
 
-            }
-
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(
                     "Backend connection error:",
                     error
                 );
 
-
                 trendingList.innerHTML = `
-
                     <li style="color:#ff6b6b;">
-
                         ❌ Unable to connect
                         to the crime database.
 
                         <br><br>
 
-                        ${escapeHTML(
-                            error.message
-                        )}
-
+                        ${escapeHTML(error.message)}
                     </li>
-
                 `;
-
             }
-
         }
-
-
-        /* ==========================================
-           SEARCH CASES
-        ========================================== */
 
         searchBox.addEventListener(
             "input",
             function () {
-
 
                 const searchTerm =
                     searchBox.value
                         .trim()
                         .toLowerCase();
 
-
                 console.log(
                     "Searching for:",
                     searchTerm
                 );
-
-
-                /* ==============================
-                   EMPTY SEARCH
-                ============================== */
 
                 if (!searchTerm) {
 
                     searchResults.innerHTML = "";
 
                     return;
-
                 }
-
-
-                /* ==============================
-                   FILTER CASES
-                ============================== */
 
                 const filteredCases =
                     cases.filter(
@@ -1258,9 +978,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.caseId || ""
@@ -1268,9 +986,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.category || ""
@@ -1278,9 +994,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.caseType || ""
@@ -1288,9 +1002,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.state || ""
@@ -1298,9 +1010,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.location || ""
@@ -1308,9 +1018,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.year || ""
@@ -1318,9 +1026,7 @@
                                 .toLowerCase()
                                 .includes(searchTerm)
 
-
                                 ||
-
 
                                 String(
                                     item.summary || ""
@@ -1329,100 +1035,54 @@
                                 .includes(searchTerm)
 
                             );
-
                         }
                     );
-
 
                 console.log(
                     "Search results:",
                     filteredCases
                 );
 
-
-                /* ==============================
-                   NO RESULTS
-                ============================== */
-
-                if (
-                    filteredCases.length === 0
-                ) {
+                if (filteredCases.length === 0) {
 
                     searchResults.innerHTML = `
-
                         <div class="no-results">
 
                             🔍 No cases found for
-
-                            "<strong>
-                                ${escapeHTML(
-                                    searchTerm
-                                )}
-                            </strong>"
+                            "<strong>${escapeHTML(searchTerm)}</strong>"
 
                         </div>
-
                     `;
 
                     return;
-
                 }
-
-
-                /* ==============================
-                   DISPLAY RESULTS
-                ============================== */
 
                 searchResults.innerHTML = "";
 
-
                 filteredCases.forEach(
                     function (caseItem) {
-
 
                         const result =
                             document.createElement(
                                 "div"
                             );
 
-
                         result.className =
                             "search-result";
 
-
                         result.innerHTML = `
-
-                            <div
-                                class="search-result-title">
-
-                                ${escapeHTML(
-                                    caseItem.title
-                                )}
-
+                            <div class="search-result-title">
+                                ${escapeHTML(caseItem.title)}
                             </div>
 
+                            <div class="search-result-meta">
 
-                            <div
-                                class="search-result-meta">
-
-                                ${escapeHTML(
-                                    caseItem.caseId
-                                )}
-
+                                ${escapeHTML(caseItem.caseId)}
                                 •
-
-                                ${escapeHTML(
-                                    caseItem.category
-                                )}
-
+                                ${escapeHTML(caseItem.category)}
                                 •
-
-                                ${escapeHTML(
-                                    caseItem.caseType
-                                )}
-
+                                ${escapeHTML(caseItem.caseType)}
                                 •
-
                                 ${escapeHTML(
                                     caseItem.state ||
                                     caseItem.location ||
@@ -1430,9 +1090,7 @@
                                 )}
 
                             </div>
-
                         `;
-
 
                         result.addEventListener(
                             "click",
@@ -1441,56 +1099,36 @@
                                 viewCase(
                                     caseItem.caseId
                                 );
-
                             }
                         );
-
 
                         searchResults.appendChild(
                             result
                         );
-
                     }
                 );
-
             }
         );
-
-
-        /* ==========================================
-           OPEN CATEGORY
-        ========================================== */
 
         function openCategory(category) {
 
             selectedCategory =
                 category;
 
-
             regionTitle.textContent =
-                category +
-                " Cases";
-
+                category + " Cases";
 
             regionSection.classList.add(
                 "active"
             );
 
-
             regionSection.scrollIntoView({
                 behavior: "smooth",
                 block: "center"
             });
-
         }
 
-
-        /* ==========================================
-           SHOW CASES BY REGION
-        ========================================== */
-
         function showCases(region) {
-
 
             let filteredCases =
                 cases.filter(
@@ -1501,16 +1139,12 @@
                         )
                         .toLowerCase()
                         .trim()
-
                         ===
-
                         selectedCategory
                             .toLowerCase()
                             .trim();
-
                     }
                 );
-
 
             let regionCases =
                 filteredCases.filter(
@@ -1521,20 +1155,12 @@
                         )
                         .toLowerCase()
                         .trim()
-
                         ===
-
                         region
                             .toLowerCase()
                             .trim();
-
                     }
                 );
-
-
-            /* =====================================
-               NATIONAL FALLBACK
-            ===================================== */
 
             if (
                 region === "National" &&
@@ -1551,55 +1177,34 @@
                                     caseItem.state
                                 ).trim() !== ""
                             );
-
                         }
                     );
-
             }
 
-
-            /* =====================================
-               DISPLAY
-            ===================================== */
-
-            if (
-                regionCases.length === 0
-            ) {
+            if (regionCases.length === 0) {
 
                 alert(
                     `No ${region} ${selectedCategory} cases found.`
                 );
 
                 return;
-
             }
-
 
             displaySearchResults(
                 regionCases
             );
-
         }
-
-
-        /* ==========================================
-           DISPLAY SEARCH RESULTS IN TRENDING
-           Used by category/region filters
-        ========================================== */
 
         function displaySearchResults(
             caseList
         ) {
-
 
             console.log(
                 "Displaying search results:",
                 caseList
             );
 
-
             trendingList.innerHTML = "";
-
 
             if (
                 !caseList ||
@@ -1607,64 +1212,35 @@
             ) {
 
                 trendingList.innerHTML = `
-
-                    <li style="
-                        color:#aaa;
-                        cursor:default;
-                    ">
-
+                    <li style="color:#aaa;">
                         🔍 No cases found.
-
                     </li>
-
                 `;
 
                 return;
-
             }
-
 
             caseList.forEach(
                 function (caseItem) {
-
 
                     const li =
                         document.createElement(
                             "li"
                         );
 
-
                     li.innerHTML = `
-
                         <div class="trending-title">
-
-                            ${escapeHTML(
-                                caseItem.title
-                            )}
-
+                            ${escapeHTML(caseItem.title)}
                         </div>
-
 
                         <div class="trending-meta">
 
-                            ${escapeHTML(
-                                caseItem.caseId
-                            )}
-
+                            ${escapeHTML(caseItem.caseId)}
                             •
-
-                            ${escapeHTML(
-                                caseItem.category
-                            )}
-
+                            ${escapeHTML(caseItem.category)}
                             •
-
-                            ${escapeHTML(
-                                caseItem.caseType
-                            )}
-
+                            ${escapeHTML(caseItem.caseType)}
                             •
-
                             ${escapeHTML(
                                 caseItem.state ||
                                 caseItem.location ||
@@ -1672,13 +1248,10 @@
                             )}
 
                         </div>
-
                     `;
-
 
                     li.style.cursor =
                         "pointer";
-
 
                     li.addEventListener(
                         "click",
@@ -1687,32 +1260,21 @@
                             viewCase(
                                 caseItem.caseId
                             );
-
                         }
                     );
-
 
                     trendingList.appendChild(
                         li
                     );
-
                 }
             );
-
         }
-
-
-        /* ==========================================
-           DISPLAY TRENDING CASES
-        ========================================== */
 
         function displayTrending(
             caseList
         ) {
 
-
             trendingList.innerHTML = "";
-
 
             if (
                 !caseList ||
@@ -1720,26 +1282,13 @@
             ) {
 
                 trendingList.innerHTML = `
-
-                    <li style="
-                        color:#aaa;
-                        cursor:default;
-                    ">
-
+                    <li style="color:#aaa;">
                         No cases available.
-
                     </li>
-
                 `;
 
                 return;
-
             }
-
-
-            /* =====================================
-               SHOW LATEST 5 CASES
-            ===================================== */
 
             const trendingCases =
                 [...caseList]
@@ -1747,59 +1296,32 @@
                     function (a, b) {
 
                         return (
-                            Number(
-                                b.year || 0
-                            )
-
-                            -
-
-                            Number(
-                                a.year || 0
-                            )
+                            Number(b.year || 0) -
+                            Number(a.year || 0)
                         );
-
                     }
                 )
                 .slice(0, 5);
 
-
             trendingCases.forEach(
                 function (caseItem) {
-
 
                     const li =
                         document.createElement(
                             "li"
                         );
 
-
                     li.innerHTML = `
-
-                        <div
-                            class="trending-title">
-
-                            ${escapeHTML(
-                                caseItem.title
-                            )}
-
+                        <div class="trending-title">
+                            ${escapeHTML(caseItem.title)}
                         </div>
 
+                        <div class="trending-meta">
 
-                        <div
-                            class="trending-meta">
-
-                            ${escapeHTML(
-                                caseItem.caseId
-                            )}
-
+                            ${escapeHTML(caseItem.caseId)}
                             •
-
-                            ${escapeHTML(
-                                caseItem.category
-                            )}
-
+                            ${escapeHTML(caseItem.category)}
                             •
-
                             ${escapeHTML(
                                 caseItem.state ||
                                 caseItem.location ||
@@ -1813,9 +1335,7 @@
                             }
 
                         </div>
-
                     `;
-
 
                     li.onclick =
                         function () {
@@ -1823,168 +1343,89 @@
                             viewCase(
                                 caseItem.caseId
                             );
-
                         };
-
 
                     trendingList.appendChild(
                         li
                     );
-
                 }
             );
-
         }
 
-
-        /* ==========================================
-           VIEW SINGLE CASE
-        ========================================== */
-
-        async function viewCase(
-            caseId
-        ) {
-
+        async function viewCase(caseId) {
 
             try {
-
 
                 console.log(
                     "Opening case:",
                     caseId
                 );
 
-
                 const response =
                     await fetch(
                         `${API_URL}/${encodeURIComponent(caseId)}`
                     );
-
 
                 if (!response.ok) {
 
                     throw new Error(
                         "Case not found"
                     );
-
                 }
-
 
                 const caseData =
                     await response.json();
-
 
                 console.log(
                     "Case data:",
                     caseData
                 );
 
-
                 const details =
                     document.getElementById(
                         "caseDetails"
                     );
 
-
                 details.innerHTML = `
 
                     <h2>
-
-                        ${escapeHTML(
-                            caseData.title
-                        )}
-
+                        ${escapeHTML(caseData.title)}
                     </h2>
 
-
                     <div class="detail">
-
-                        <strong>
-                            Case ID:
-                        </strong>
-
-                        ${escapeHTML(
-                            caseData.caseId
-                        )}
-
+                        <strong>Case ID:</strong>
+                        ${escapeHTML(caseData.caseId)}
                     </div>
 
-
                     <div class="detail">
-
-                        <strong>
-                            Category:
-                        </strong>
-
-                        ${escapeHTML(
-                            caseData.category
-                        )}
-
+                        <strong>Category:</strong>
+                        ${escapeHTML(caseData.category)}
                     </div>
 
-
                     <div class="detail">
-
-                        <strong>
-                            Case Type:
-                        </strong>
-
-                        ${escapeHTML(
-                            caseData.caseType
-                        )}
-
+                        <strong>Case Type:</strong>
+                        ${escapeHTML(caseData.caseType)}
                     </div>
 
-
                     <div class="detail">
-
-                        <strong>
-                            Region:
-                        </strong>
-
-                        ${escapeHTML(
-                            caseData.region
-                        )}
-
+                        <strong>Region:</strong>
+                        ${escapeHTML(caseData.region)}
                     </div>
 
-
                     <div class="detail">
-
-                        <strong>
-                            Year:
-                        </strong>
-
-                        ${caseData.year || ""}
-
+                        <strong>Year:</strong>
+                        ${escapeHTML(caseData.year)}
                     </div>
 
-
                     <div class="detail">
-
-                        <strong>
-                            State / Country:
-                        </strong>
-
-                        ${escapeHTML(
-                            caseData.state
-                        )}
-
+                        <strong>State / Country:</strong>
+                        ${escapeHTML(caseData.state)}
                     </div>
 
-
                     <div class="detail">
-
-                        <strong>
-                            Location:
-                        </strong>
-
-                        ${escapeHTML(
-                            caseData.location
-                        )}
-
+                        <strong>Location:</strong>
+                        ${escapeHTML(caseData.location)}
                     </div>
-
 
                     <div class="detail-section">
 
@@ -1993,15 +1434,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.summary
-                            )}
-
+                            ${escapeHTML(caseData.summary)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2010,15 +1446,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.fullDetails
-                            )}
-
+                            ${escapeHTML(caseData.fullDetails)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2027,15 +1458,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.victim
-                            )}
-
+                            ${escapeHTML(caseData.victim)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2044,15 +1470,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.accused
-                            )}
-
+                            ${escapeHTML(caseData.accused)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2061,15 +1482,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.timeline
-                            )}
-
+                            ${escapeHTML(caseData.timeline)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2078,15 +1494,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.evidence
-                            )}
-
+                            ${escapeHTML(caseData.evidence)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2095,15 +1506,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.forensicAnalysis
-                            )}
-
+                            ${escapeHTML(caseData.forensicAnalysis)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2112,15 +1518,10 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.courtVerdict
-                            )}
-
+                            ${escapeHTML(caseData.courtVerdict)}
                         </p>
 
                     </div>
-
 
                     <div class="detail-section">
 
@@ -2129,53 +1530,31 @@
                         </h3>
 
                         <p>
-
-                            ${escapeHTML(
-                                caseData.references
-                            )}
-
+                            ${escapeHTML(caseData.references)}
                         </p>
 
                     </div>
-
                 `;
-
 
                 document.getElementById(
                     "caseModal"
                 ).style.display =
                     "block";
 
-
-                /* Clear search results after opening */
-
                 searchResults.innerHTML = "";
 
-
-            }
-
-
-            catch (error) {
-
+            } catch (error) {
 
                 console.error(
                     "Unable to load case:",
                     error
                 );
 
-
                 alert(
                     "Unable to load case details."
                 );
-
             }
-
         }
-
-
-        /* ==========================================
-           CLOSE MODAL
-        ========================================== */
 
         function closeModal() {
 
@@ -2183,43 +1562,25 @@
                 "caseModal"
             ).style.display =
                 "none";
-
         }
-
-
-        /* ==========================================
-           CLOSE MODAL WHEN CLICKING OUTSIDE
-        ========================================== */
 
         window.onclick =
             function (event) {
-
 
                 const modal =
                     document.getElementById(
                         "caseModal"
                     );
 
-
                 if (
                     event.target === modal
                 ) {
 
                     closeModal();
-
                 }
-
             };
 
-
-        /* ==========================================
-           ESCAPE HTML
-        ========================================== */
-
-        function escapeHTML(
-            value
-        ) {
-
+        function escapeHTML(value) {
 
             if (
                 value === undefined ||
@@ -2227,49 +1588,19 @@
             ) {
 
                 return "";
-
             }
 
-
             return String(value)
-
-                .replace(
-                    /&/g,
-                    "&amp;"
-                )
-
-                .replace(
-                    /</g,
-                    "&lt;"
-                )
-
-                .replace(
-                    />/g,
-                    "&gt;"
-                )
-
-                .replace(
-                    /"/g,
-                    "&quot;"
-                )
-
-                .replace(
-                    /'/g,
-                    "&#039;"
-                );
-
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
-
-
-        /* ==========================================
-           START APPLICATION
-        ========================================== */
 
         fetchCases();
 
-
     </script>
-
 
 </body>
 
