@@ -1090,6 +1090,68 @@ async function fetchCases() {
     }
 
 }
+// =========================================
+// SEARCH CASES
+// =========================================
+
+searchBox.addEventListener("input", function () {
+
+    const searchTerm =
+        searchBox.value
+            .trim()
+            .toLowerCase();
+
+    // Empty search → show all cases
+    if (!searchTerm) {
+
+        displayTrending(cases);
+
+        return;
+    }
+
+    // Filter cases
+    const filteredCases =
+        cases.filter(item => {
+
+            return (
+
+                String(item.title || "")
+                    .toLowerCase()
+                    .includes(searchTerm)
+
+                ||
+
+                String(item.caseId || "")
+                    .toLowerCase()
+                    .includes(searchTerm)
+
+                ||
+
+                String(item.category || "")
+                    .toLowerCase()
+                    .includes(searchTerm)
+
+                ||
+
+                String(item.state || "")
+                    .toLowerCase()
+                    .includes(searchTerm)
+
+                ||
+
+                String(item.location || "")
+                    .toLowerCase()
+                    .includes(searchTerm)
+
+            );
+
+        });
+
+
+    // Show results
+    displayTrending(filteredCases);
+
+});
 
 
 /* ==========================================
