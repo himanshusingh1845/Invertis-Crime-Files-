@@ -934,24 +934,21 @@ footer p {
 
 </footer>
 
-
-
 <script>
 
-
 /* ==========================================
-   BACKEND
+   BACKEND API
 ========================================== */
 
 const API_URL =
-"https://invertis-crime-files-backend.onrender.com/api/cases";
+    "https://invertis-crime-files-backend.onrender.com/api/cases";
+
 
 /* ==========================================
    VARIABLES
 ========================================== */
 
 let cases = [];
-
 let selectedCategory = "";
 
 
@@ -960,24 +957,16 @@ let selectedCategory = "";
 ========================================== */
 
 const searchBox =
-    document.getElementById(
-        "search"
-    );
+    document.getElementById("search");
 
 const trendingList =
-    document.getElementById(
-        "trendingList"
-    );
+    document.getElementById("trendingList");
 
 const regionSection =
-    document.getElementById(
-        "regionSection"
-    );
+    document.getElementById("regionSection");
 
 const regionTitle =
-    document.getElementById(
-        "regionTitle"
-    );
+    document.getElementById("regionTitle");
 
 
 /* ==========================================
@@ -989,19 +978,12 @@ const typingText =
 
 let typingIndex = 0;
 
-
 function typingEffect() {
 
     const typing =
-        document.getElementById(
-            "typing"
-        );
+        document.getElementById("typing");
 
-
-    if (
-        typingIndex <
-        typingText.length
-    ) {
+    if (typingIndex < typingText.length) {
 
         typing.textContent +=
             typingText[typingIndex];
@@ -1017,12 +999,11 @@ function typingEffect() {
 
 }
 
-
 typingEffect();
 
 
 /* ==========================================
-   GET CASES
+   GET ALL CASES
 ========================================== */
 
 async function fetchCases() {
@@ -1034,10 +1015,13 @@ async function fetchCases() {
             API_URL
         );
 
-
         const response =
             await fetch(API_URL);
 
+        console.log(
+            "Server response:",
+            response.status
+        );
 
         if (!response.ok) {
 
@@ -1048,19 +1032,38 @@ async function fetchCases() {
 
         }
 
-
-        cases =
+        const data =
             await response.json();
-
 
         console.log(
             "Cases received:",
-            cases
+            data
+        );
+
+
+        /* =====================================
+           MAKE SURE RESPONSE IS AN ARRAY
+        ===================================== */
+
+        if (!Array.isArray(data)) {
+
+            throw new Error(
+                "Backend did not return a case list."
+            );
+
+        }
+
+
+        cases = data;
+
+
+        console.log(
+            "Total cases:",
+            cases.length
         );
 
 
         displayTrending(cases);
-
 
     }
 
@@ -1071,7 +1074,6 @@ async function fetchCases() {
             error
         );
 
-
         trendingList.innerHTML = `
 
             <li style="color:#ff6b6b;">
@@ -1081,7 +1083,7 @@ async function fetchCases() {
 
                 <br><br>
 
-                ${error.message}
+                ${escapeHTML(error.message)}
 
             </li>
 
@@ -1090,68 +1092,179 @@ async function fetchCases() {
     }
 
 }
-// =========================================
-// SEARCH CASES
-// =========================================
 
-searchBox.addEventListener("input", function () {
 
-    const searchTerm =
-        searchBox.value
-            .trim()
-            .toLowerCase();
+/* ==========================================
+   SEARCH CASES
+========================================== */
 
-    // Empty search → show all cases
-    if (!searchTerm) {
+searchBox.addEventListener(
+    "input",
+    function () {
 
-        displayTrending(cases);
+        const searchTerm =
+            searchBox.value
+                .trim()
+                .toLowerCase();
 
-        return;
-    }
 
-    // Filter cases
-    const filteredCases =
-        cases.filter(item => {
+        console.log(
+            "Searching for:",
+            searchTerm
+        );
 
-            return (
 
-                String(item.title || "")
-                    .toLowerCase()
-                    .includes(searchTerm)
+        /* =====================================
+           EMPTY SEARCH
+        ===================================== */
 
-                ||
+        if (!searchTerm) {
 
-                String(item.caseId || "")
-                    .toLowerCase()
-                    .includes(searchTerm)
+            displayTrending(cases);
 
-                ||
+            return;
 
-                String(item.category || "")
-                    .toLowerCase()
-                    .includes(searchTerm)
+        }
 
-                ||
 
-                String(item.state || "")
-                    .toLowerCase()
-                    .includes(searchTerm)
+        /* =====================================
+           FILTER CASES
+        ===================================== */
 
-                ||
+        const filteredCases =
+            cases.filter(
+                function (item) {
 
-                String(item.location || "")
-                    .toLowerCase()
-                    .includes(searchTerm)
+                    return (
 
+                        /* TITLE */
+
+                        String(
+                            item.title || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* CASE ID */
+
+                        String(
+                            item.caseId || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* CATEGORY */
+
+                        String(
+                            item.category || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* STATE */
+
+                        String(
+                            item.state || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* LOCATION */
+
+                        String(
+                            item.location || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* YEAR */
+
+                        String(
+                            item.year || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* CASE TYPE */
+
+                        String(
+                            item.caseType || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+
+                        ||
+
+                        /* SUMMARY */
+
+                        String(
+                            item.summary || ""
+                        )
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+                    );
+
+                }
             );
 
-        });
+
+        console.log(
+            "Search results:",
+            filteredCases
+        );
 
 
-    // Show results
-    displayTrending(filteredCases);
+        /* =====================================
+           DISPLAY RESULTS
+        ===================================== */
 
-});
+        if (filteredCases.length === 0) {
+
+            trendingList.innerHTML = `
+
+                <li style="
+                    color:#aaa;
+                    cursor:default;
+                ">
+
+                    🔍 No cases found for
+                    "<strong>${escapeHTML(searchTerm)}</strong>"
+
+                </li>
+
+            `;
+
+            return;
+
+        }
+
+
+        displaySearchResults(
+            filteredCases
+        );
+
+    }
+);
 
 
 /* ==========================================
@@ -1165,8 +1278,7 @@ function openCategory(category) {
 
 
     regionTitle.textContent =
-        category +
-        " Cases";
+        category + " Cases";
 
 
     regionSection.classList.add(
@@ -1183,22 +1295,14 @@ function openCategory(category) {
 
 
 /* ==========================================
-   SHOW CASES
+   SHOW CASES BY REGION
 ========================================== */
 
 function showCases(region) {
 
     let filteredCases =
-        [];
-
-
-    /*
-       CATEGORY FILTER
-    */
-
-    filteredCases =
         cases.filter(
-            function(caseItem) {
+            function (caseItem) {
 
                 return String(
                     caseItem.category || ""
@@ -1214,24 +1318,13 @@ function showCases(region) {
         );
 
 
-    /*
-       REGION FILTER
+    /* =====================================
+       FILTER BY REGION
+    ===================================== */
 
-       This checks the "region"
-       field if you add it to MongoDB.
-
-       Example:
-
-       region: "National"
-
-       or
-
-       region: "International"
-    */
-
-    const regionCases =
+    let regionCases =
         filteredCases.filter(
-            function(caseItem) {
+            function (caseItem) {
 
                 return String(
                     caseItem.region || ""
@@ -1247,23 +1340,21 @@ function showCases(region) {
         );
 
 
-    /*
-       TEMPORARY FALLBACK
+    /* =====================================
+       NATIONAL FALLBACK
 
-       If you haven't added
-       region to MongoDB yet,
-       National cases can be
-       identified using state.
-    */
+       If region isn't stored in MongoDB,
+       use state as indication of National.
+    ===================================== */
 
     if (
-        regionCases.length === 0 &&
-        region === "National"
+        region === "National" &&
+        regionCases.length === 0
     ) {
 
-        filteredCases =
+        regionCases =
             filteredCases.filter(
-                function(caseItem) {
+                function (caseItem) {
 
                     return (
                         caseItem.state &&
@@ -1278,20 +1369,12 @@ function showCases(region) {
     }
 
 
-    else {
-
-        filteredCases =
-            regionCases;
-
-    }
-
-
-    /*
-       DISPLAY RESULT
-    */
+    /* =====================================
+       DISPLAY
+    ===================================== */
 
     if (
-        filteredCases.length === 0
+        regionCases.length === 0
     ) {
 
         alert(
@@ -1304,32 +1387,48 @@ function showCases(region) {
 
 
     displaySearchResults(
-        filteredCases
+        regionCases
     );
 
 }
 
 
 /* ==========================================
-   DISPLAY FILTERED CASES
+   DISPLAY SEARCH RESULTS
 ========================================== */
 
 function displaySearchResults(
     caseList
 ) {
 
-    /*
-       Instead of bringing back
-       the old "Latest Cases"
-       section, show the result
-       temporarily inside Trending.
-    */
-
     trendingList.innerHTML = "";
 
 
+    if (
+        !caseList ||
+        caseList.length === 0
+    ) {
+
+        trendingList.innerHTML = `
+
+            <li style="
+                color:#aaa;
+                cursor:default;
+            ">
+
+                No cases found.
+
+            </li>
+
+        `;
+
+        return;
+
+    }
+
+
     caseList.forEach(
-        function(caseItem) {
+        function (caseItem) {
 
             const li =
                 document.createElement(
@@ -1353,13 +1452,13 @@ function displaySearchResults(
                         caseItem.caseId
                     )}
 
-                    •
+                    • 
 
                     ${escapeHTML(
                         caseItem.category
                     )}
 
-                    •
+                    • 
 
                     ${escapeHTML(
                         caseItem.state ||
@@ -1367,13 +1466,19 @@ function displaySearchResults(
                         ""
                     )}
 
+                    ${
+                        caseItem.year
+                            ? ` • ${caseItem.year}`
+                            : ""
+                    }
+
                 </div>
 
             `;
 
 
             li.onclick =
-                function() {
+                function () {
 
                     viewCase(
                         caseItem.caseId
@@ -1389,14 +1494,11 @@ function displaySearchResults(
         }
     );
 
-
-    
-
 }
 
 
 /* ==========================================
-   TRENDING CASES
+   DISPLAY TRENDING CASES
 ========================================== */
 
 function displayTrending(
@@ -1413,8 +1515,13 @@ function displayTrending(
 
         trendingList.innerHTML = `
 
-            <li>
-                No trending cases available.
+            <li style="
+                color:#aaa;
+                cursor:default;
+            ">
+
+                No cases available.
+
             </li>
 
         `;
@@ -1424,15 +1531,14 @@ function displayTrending(
     }
 
 
-    /*
-       Latest 5 cases are
-       treated as trending.
-    */
+    /* =====================================
+       SHOW LATEST 5 CASES
+    ===================================== */
 
     const trendingCases =
         [...caseList]
         .sort(
-            function(a,b) {
+            function (a, b) {
 
                 return (
                     Number(
@@ -1446,11 +1552,11 @@ function displayTrending(
 
             }
         )
-        .slice(0,5);
+        .slice(0, 5);
 
 
     trendingCases.forEach(
-        function(caseItem) {
+        function (caseItem) {
 
             const li =
                 document.createElement(
@@ -1474,13 +1580,13 @@ function displayTrending(
                         caseItem.caseId
                     )}
 
-                    •
+                    • 
 
                     ${escapeHTML(
                         caseItem.category
                     )}
 
-                    •
+                    • 
 
                     ${escapeHTML(
                         caseItem.state ||
@@ -1488,13 +1594,19 @@ function displayTrending(
                         ""
                     )}
 
+                    ${
+                        caseItem.year
+                            ? ` • ${caseItem.year}`
+                            : ""
+                    }
+
                 </div>
 
             `;
 
 
             li.onclick =
-                function() {
+                function () {
 
                     viewCase(
                         caseItem.caseId
@@ -1514,7 +1626,7 @@ function displayTrending(
 
 
 /* ==========================================
-   VIEW CASE
+   VIEW SINGLE CASE
 ========================================== */
 
 async function viewCase(
@@ -1522,6 +1634,12 @@ async function viewCase(
 ) {
 
     try {
+
+        console.log(
+            "Opening case:",
+            caseId
+        );
+
 
         const response =
             await fetch(
@@ -1540,6 +1658,12 @@ async function viewCase(
 
         const caseData =
             await response.json();
+
+
+        console.log(
+            "Case data:",
+            caseData
+        );
 
 
         const details =
@@ -1588,6 +1712,19 @@ async function viewCase(
             <div class="detail">
 
                 <strong>
+                    Case Type:
+                </strong>
+
+                ${escapeHTML(
+                    caseData.caseType
+                )}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>
                     Region:
                 </strong>
 
@@ -1604,7 +1741,7 @@ async function viewCase(
                     Year:
                 </strong>
 
-                ${caseData.year}
+                ${caseData.year || ""}
 
             </div>
 
@@ -1612,7 +1749,7 @@ async function viewCase(
             <div class="detail">
 
                 <strong>
-                    State:
+                    State / Country:
                 </strong>
 
                 ${escapeHTML(
@@ -1782,6 +1919,7 @@ async function viewCase(
     catch (error) {
 
         console.error(
+            "Unable to load case:",
             error
         );
 
@@ -1810,11 +1948,11 @@ function closeModal() {
 
 
 /* ==========================================
-   CLOSE MODAL OUTSIDE
+   CLOSE MODAL WHEN CLICKING OUTSIDE
 ========================================== */
 
 window.onclick =
-    function(event) {
+    function (event) {
 
         const modal =
             document.getElementById(
@@ -1834,98 +1972,6 @@ window.onclick =
 
 
 /* ==========================================
-   SEARCH
-========================================== */
-
-searchBox.addEventListener(
-    "input",
-    function() {
-
-        const value =
-            searchBox.value
-                .toLowerCase()
-                .trim();
-
-
-        if (
-            value === ""
-        ) {
-
-            displayTrending(
-                cases
-            );
-
-            return;
-
-        }
-
-
-        const filtered =
-            cases.filter(
-                function(caseItem) {
-
-                    return (
-
-                        String(
-                            caseItem.title || ""
-                        )
-                        .toLowerCase()
-                        .includes(value)
-
-                        ||
-
-                        String(
-                            caseItem.category || ""
-                        )
-                        .toLowerCase()
-                        .includes(value)
-
-                        ||
-
-                        String(
-                            caseItem.state || ""
-                        )
-                        .toLowerCase()
-                        .includes(value)
-
-                        ||
-
-                        String(
-                            caseItem.location || ""
-                        )
-                        .toLowerCase()
-                        .includes(value)
-
-                        ||
-
-                        String(
-                            caseItem.caseId || ""
-                        )
-                        .toLowerCase()
-                        .includes(value)
-
-                        ||
-
-                        String(
-                            caseItem.year || ""
-                        )
-                        .includes(value)
-
-                    );
-
-                }
-            );
-
-
-        displaySearchResults(
-            filtered
-        );
-
-    }
-);
-
-
-/* ==========================================
    ESCAPE HTML
 ========================================== */
 
@@ -1939,27 +1985,31 @@ function escapeHTML(
     ) {
 
         return "";
-
     }
 
 
     return String(value)
+
         .replace(
             /&/g,
             "&amp;"
         )
+
         .replace(
             /</g,
             "&lt;"
         )
+
         .replace(
             />/g,
             "&gt;"
         )
+
         .replace(
             /"/g,
             "&quot;"
         )
+
         .replace(
             /'/g,
             "&#039;"
@@ -1969,7 +2019,7 @@ function escapeHTML(
 
 
 /* ==========================================
-   LOAD DATA
+   START APPLICATION
 ========================================== */
 
 fetchCases();
