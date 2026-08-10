@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://invertis-crime-files.onrender.com/sitemap.xml
