@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Forensic Crime Files</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 21px;
+        }
+
+        header span {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #dc2626;
+            color: white;
+
+            padding: 9px 15px;
+            border-radius: 7px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .top-section h2 {
+            font-size: 25px;
+        }
+
+        .add-btn {
+            background: #b91c1c;
+            color: white;
+            border: none;
+
+            padding: 12px 18px;
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .card {
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            margin-bottom: 30px;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .card h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 7px;
+
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #b91c1c;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .checkbox-row input {
+            width: auto;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .save-btn {
+            background: #15803d;
+            color: white;
+
+            border: none;
+            border-radius: 7px;
+
+            padding: 12px 22px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancel-btn {
+            background: #6b7280;
+            color: white;
+
+            border: none;
+            border-radius: 7px;
+
+            padding: 12px 22px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* =========================
+           CASE LIST
+        ========================= */
+
+        .case-card {
+            border: 1px solid #e5e7eb;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            margin-bottom: 14px;
+
+            background: #fafafa;
+        }
+
+        .case-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .case-meta {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 4px 8px;
+
+            border-radius: 5px;
+
+            font-size: 11px;
+            font-weight: bold;
+
+            margin-right: 5px;
+        }
+
+        .national {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .international {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .trending {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .case-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 8px 13px;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #2563eb;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+            display: none;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        .success {
+            display: block !important;
+
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .error {
+            display: block !important;
+
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 17px;
+            }
+
+            header span {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .top-section {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .save-btn,
+            .cancel-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div>
+        <h1>Forensic Crime Files</h1>
+        <span>Administrator Dashboard</span>
+    </div>
+
+    <button
+        class="logout-btn"
+        onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <div class="top-section">
+
+        <h2>Manage Cases</h2>
+
+        <button
+            class="add-btn"
+            onclick="showAddForm()">
+            + Add New Case
+        </button>
+
+    </div>
+
+
+    <div id="message"></div>
+
+
+    <!-- =========================
+         ADD / EDIT FORM
+    ========================= -->
+
+    <div
+        class="card"
+        id="caseFormCard"
+        style="display:none;">
+
+        <h3 id="formTitle">
+            Add New Case
+        </h3>
+
+
+        <form id="caseForm">
+
+            <div class="form-grid">
+
+                <!-- CASE ID -->
+
+                <div class="form-group">
+
+                    <label>
+                        Case ID *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="caseId"
+                        required
+                        placeholder="Example: CR004">
+
+                </div>
+
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Case Title *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        required
+                        placeholder="Enter case title">
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Crime Category *
+                    </label>
+
+                    <select
+                        id="category"
+                        required>
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Murder">
+                            Murder
+                        </option>
+
+                        <option value="Rape">
+                            Rape
+                        </option>
+
+                        <option value="Theft / Robbery">
+                            Theft / Robbery
+                        </option>
+
+                        <option value="Suicide">
+                            Suicide
+                        </option>
+
+                        <option value="Child Abuse">
+                            Child Abuse
+                        </option>
+
+                        <option value="Unsolved Cases">
+                            Unsolved Cases
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- CASE TYPE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Case Type *
+                    </label>
+
+                    <select
+                        id="caseType"
+                        required>
+
+                        <option value="">
+                            Select Type
+                        </option>
+
+                        <option value="National">
+                            National
+                        </option>
+
+                        <option value="International">
+                            International
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- YEAR -->
+
+                <div class="form-group">
+
+                    <label>
+                        Year *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="year"
+                        required
+                        min="1900"
+                        max="2100">
+
+                </div>
+
+
+                <!-- STATE -->
+
+                <div class="form-group">
+
+                    <label>
+                        State / Country *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="state"
+                        required
+                        placeholder="Example: Delhi">
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Example: New Delhi">
+
+                </div>
+
+
+                <!-- TRENDING -->
+
+                <div class="form-group">
+
+                    <label>
+                        Trending Case
+                    </label>
+
+                    <div class="checkbox-row">
+
+                        <input
+                            type="checkbox"
+                            id="trending">
+
+                        <span>
+                            Show this case in Trending
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Summary
+                    </label>
+
+                    <textarea
+                        id="summary"
+                        placeholder="Short case summary"></textarea>
+
+                </div>
+
+
+                <!-- FULL DETAILS -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Full Details
+                    </label>
+
+                    <textarea
+                        id="fullDetails"
+                        placeholder="Complete details of the case"></textarea>
+
+                </div>
+
+
+                <!-- VICTIM -->
+
+                <div class="form-group">
+
+                    <label>
+                        Victim
+                    </label>
+
+                    <textarea
+                        id="victim"
+                        placeholder="Victim information"></textarea>
+
+                </div>
+
+
+                <!-- ACCUSED -->
+
+                <div class="form-group">
+
+                    <label>
+                        Accused
+                    </label>
+
+                    <textarea
+                        id="accused"
+                        placeholder="Accused information"></textarea>
+
+                </div>
+
+
+                <!-- TIMELINE -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Timeline
+                    </label>
+
+                    <textarea
+                        id="timeline"
+                        placeholder="Important events and dates"></textarea>
+
+                </div>
+
+
+                <!-- EVIDENCE -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Evidence
+                    </label>
+
+                    <textarea
+                        id="evidence"
+                        placeholder="Evidence details"></textarea>
+
+                </div>
+
+
+                <!-- FORENSIC -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Forensic Analysis
+                    </label>
+
+                    <textarea
+                        id="forensicAnalysis"
+                        placeholder="Forensic analysis"></textarea>
+
+                </div>
+
+
+                <!-- VERDICT -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Court Verdict
+                    </label>
+
+                    <textarea
+                        id="courtVerdict"
+                        placeholder="Court verdict / current status"></textarea>
+
+                </div>
+
+
+                <!-- REFERENCES -->
+
+                <div class="form-group full">
+
+                    <label>
+                        References
+                    </label>
+
+                    <textarea
+                        id="references"
+                        placeholder="Sources / references"></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                    id="saveButton">
+
+                    Save Case
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="cancelForm()">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         CASE LIST
+    ========================= -->
+
+    <div class="card">
+
+        <h3>
+            Existing Cases
+        </h3>
+
+        <div id="casesList">
+
+            Loading cases...
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    // =========================================
+    // API
+    // =========================================
+
+    const API_URL =
+        "http://localhost:5000";
+
+
+    // =========================================
+    // AUTHENTICATION CHECK
+    // =========================================
+
+    const token =
+        localStorage.getItem("adminToken");
+
+
+    if (!token) {
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+
+    // =========================================
+    // ELEMENTS
+    // =========================================
+
+    const caseForm =
+        document.getElementById("caseForm");
+
+    const caseFormCard =
+        document.getElementById("caseFormCard");
+
+    const casesList =
+        document.getElementById("casesList");
+
+    const message =
+        document.getElementById("message");
+
+    const formTitle =
+        document.getElementById("formTitle");
+
+    const saveButton =
+        document.getElementById("saveButton");
+
+
+    let editingCaseId = null;
+
+
+    // =========================================
+    // MESSAGE
+    // =========================================
+
+    function showMessage(
+        text,
+        type
+    ) {
+
+        message.textContent =
+            text;
+
+        message.className =
+            type;
+
+        setTimeout(
+            () => {
+
+                message.className = "";
+
+                message.textContent = "";
+
+            },
+            4000
+        );
+
+    }
+
+
+    // =========================================
+    // SHOW ADD FORM
+    // =========================================
+
+    function showAddForm() {
+
+        editingCaseId = null;
+
+        caseForm.reset();
+
+        formTitle.textContent =
+            "Add New Case";
+
+        saveButton.textContent =
+            "Save Case";
+
+        caseFormCard.style.display =
+            "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // =========================================
+    // CANCEL
+    // =========================================
+
+    function cancelForm() {
+
+        editingCaseId = null;
+
+        caseForm.reset();
+
+        caseFormCard.style.display =
+            "none";
+
+    }
+
+
+    // =========================================
+    // LOAD CASES
+    // =========================================
+
+    async function loadCases() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/cases`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load cases"
+                );
+
+            }
+
+
+            const cases =
+                await response.json();
+
+
+            displayCases(cases);
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            casesList.innerHTML =
+                `<p style="color:red;">
+                    Failed to load cases.
+                </p>`;
+
+        }
+
+    }
+
+
+    // =========================================
+    // DISPLAY CASES
+    // =========================================
+
+    function displayCases(cases) {
+
+        if (!cases.length) {
+
+            casesList.innerHTML =
+                "<p>No cases found.</p>";
+
+            return;
+
+        }
+
+
+        casesList.innerHTML =
+            cases.map(
+                item => `
+
+                <div class="case-card">
+
+                    <div class="case-title">
+                        ${escapeHTML(item.title)}
+                    </div>
+
+                    <div class="case-meta">
+
+                        ${escapeHTML(item.caseId)}
+                        •
+                        ${escapeHTML(item.category)}
+                        •
+                        ${item.year}
+
+                    </div>
+
+                    <div>
+
+                        <span class="badge ${
+                            item.caseType ===
+                            "International"
+                            ? "international"
+                            : "national"
+                        }">
+
+                            ${escapeHTML(item.caseType)}
+
+                        </span>
+
+
+                        ${
+                            item.trending
+                            ? `
+                                <span class="badge trending">
+                                    🔥 Trending
+                                </span>
+                              `
+                            : ""
+                        }
+
+                    </div>
+
+
+                    <div class="case-actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editCase('${item.caseId}')">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteCase('${item.caseId}')">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `
+            ).join("");
+
+    }
+
+
+    // =========================================
+    // ADD / UPDATE CASE
+    // =========================================
+
+    caseForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+
+            const caseData = {
+
+                caseId:
+                    document.getElementById(
+                        "caseId"
+                    ).value.trim(),
+
+                title:
+                    document.getElementById(
+                        "title"
+                    ).value.trim(),
+
+                category:
+                    document.getElementById(
+                        "category"
+                    ).value,
+
+                caseType:
+                    document.getElementById(
+                        "caseType"
+                    ).value,
+
+                trending:
+                    document.getElementById(
+                        "trending"
+                    ).checked,
+
+                year:
+                    Number(
+                        document.getElementById(
+                            "year"
+                        ).value
+                    ),
+
+                state:
+                    document.getElementById(
+                        "state"
+                    ).value.trim(),
+
+                location:
+                    document.getElementById(
+                        "location"
+                    ).value.trim(),
+
+                summary:
+                    document.getElementById(
+                        "summary"
+                    ).value.trim(),
+
+                fullDetails:
+                    document.getElementById(
+                        "fullDetails"
+                    ).value.trim(),
+
+                victim:
+                    document.getElementById(
+                        "victim"
+                    ).value.trim(),
+
+                accused:
+                    document.getElementById(
+                        "accused"
+                    ).value.trim(),
+
+                timeline:
+                    document.getElementById(
+                        "timeline"
+                    ).value.trim(),
+
+                evidence:
+                    document.getElementById(
+                        "evidence"
+                    ).value.trim(),
+
+                forensicAnalysis:
+                    document.getElementById(
+                        "forensicAnalysis"
+                    ).value.trim(),
+
+                courtVerdict:
+                    document.getElementById(
+                        "courtVerdict"
+                    ).value.trim(),
+
+                references:
+                    document.getElementById(
+                        "references"
+                    ).value.trim()
+
+            };
+
+
+            try {
+
+                saveButton.disabled =
+                    true;
+
+                saveButton.textContent =
+                    "Saving...";
+
+
+                let url =
+                    `${API_URL}/api/cases`;
+
+                let method =
+                    "POST";
+
+
+                // UPDATE
+
+                if (editingCaseId) {
+
+                    url =
+                        `${API_URL}/api/cases/${editingCaseId}`;
+
+                    method =
+                        "PUT";
+
+                }
+
+
+                const response =
+                    await fetch(
+                        url,
+                        {
+
+                            method:
+
+                                method,
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    caseData
+                                )
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        data.message ||
+                        "Operation failed"
+                    );
+
+                }
+
+
+                showMessage(
+                    editingCaseId
+                        ? "Case updated successfully."
+                        : "Case added successfully.",
+                    "success"
+                );
+
+
+                cancelForm();
+
+                loadCases();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+            finally {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    editingCaseId
+                        ? "Update Case"
+                        : "Save Case";
+
+            }
+
+        }
+    );
+
+
+    // =========================================
+    // EDIT CASE
+    // =========================================
+
+    async function editCase(caseId) {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/cases/${caseId}`
+                );
+
+
+            const item =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    item.message ||
+                    "Could not load case"
+                );
+
+            }
+
+
+            editingCaseId =
+                caseId;
+
+
+            document.getElementById(
+                "caseId"
+            ).value =
+                item.caseId || "";
+
+
+            document.getElementById(
+                "title"
+            ).value =
+                item.title || "";
+
+
+            document.getElementById(
+                "category"
+            ).value =
+                item.category || "";
+
+
+            document.getElementById(
+                "caseType"
+            ).value =
+                item.caseType || "";
+
+
+            document.getElementById(
+                "trending"
+            ).checked =
+                item.trending === true;
+
+
+            document.getElementById(
+                "year"
+            ).value =
+                item.year || "";
+
+
+            document.getElementById(
+                "state"
+            ).value =
+                item.state || "";
+
+
+            document.getElementById(
+                "location"
+            ).value =
+                item.location || "";
+
+
+            document.getElementById(
+                "summary"
+            ).value =
+                item.summary || "";
+
+
+            document.getElementById(
+                "fullDetails"
+            ).value =
+                item.fullDetails || "";
+
+
+            document.getElementById(
+                "victim"
+            ).value =
+                item.victim || "";
+
+
+            document.getElementById(
+                "accused"
+            ).value =
+                item.accused || "";
+
+
+            document.getElementById(
+                "timeline"
+            ).value =
+                item.timeline || "";
+
+
+            document.getElementById(
+                "evidence"
+            ).value =
+                item.evidence || "";
+
+
+            document.getElementById(
+                "forensicAnalysis"
+            ).value =
+                item.forensicAnalysis || "";
+
+
+            document.getElementById(
+                "courtVerdict"
+            ).value =
+                item.courtVerdict || "";
+
+
+            document.getElementById(
+                "references"
+            ).value =
+                item.references || "";
+
+
+            formTitle.textContent =
+                "Edit Case";
+
+            saveButton.textContent =
+                "Update Case";
+
+
+            caseFormCard.style.display =
+                "block";
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+
+
+    // =========================================
+    // DELETE CASE
+    // =========================================
+
+    async function deleteCase(caseId) {
+
+        const confirmed =
+            confirm(
+                `Are you sure you want to delete case ${caseId}?`
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/cases/${caseId}`,
+                    {
+
+                        method: "DELETE",
+
+                        headers: {
+
+                            "Authorization":
+                                `Bearer ${token}`
+
+                        }
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Delete failed"
+                );
+
+            }
+
+
+            showMessage(
+                "Case deleted successfully.",
+                "success"
+            );
+
+
+            loadCases();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+
+
+    // =========================================
+    // LOGOUT
+    // =========================================
+
+    function logout() {
+
+        localStorage.removeItem(
+            "adminToken"
+        );
+
+        localStorage.removeItem(
+            "adminUsername"
+        );
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+
+    // =========================================
+    // HTML ESCAPE
+    // =========================================
+
+    function escapeHTML(value) {
+
+        if (value === null ||
+            value === undefined) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+    }
+
+
+    // =========================================
+    // INITIAL LOAD
+    // =========================================
+
+    loadCases();
+
+</script>
+
+</body>
+</html>

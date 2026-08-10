@@ -1,0 +1,60 @@
+### CREATE CASE
+
+POST http://localhost:5000/api/cases
+Content-Type: application/json
+
+{
+    "caseId": "CR003",
+    "title": "Sample Robbery Case",
+    "category": "Theft/Robbery",
+    "year": 2025,
+    "state": "Uttar Pradesh",
+    "location": "Bareilly",
+    "summary": "Sample robbery case for testing.",
+    "fullDetails": "Dummy information for backend testing.",
+    "victim": "Test information",
+    "accused": "Test information",
+    "timeline": "Investigation started in 2025.",
+    "evidence": "Sample CCTV footage.",
+    "forensicAnalysis": "Sample forensic analysis.",
+    "courtVerdict": "Sample court verdict.",
+    "references": "Sample reference."
+}
+
+
+### GET ALL CASES
+
+GET http://localhost:5000/api/cases
+
+
+### GET ONE CASE
+
+GET http://localhost:5000/api/cases/CR003
+
+
+### UPDATE CR003
+
+PUT http://localhost:5000/api/cases/CR003
+Content-Type: application/json
+
+{
+    "title": "Updated Robbery Case",
+    "category": "Theft/Robbery",
+    "year": 2025,
+    "state": "Uttar Pradesh",
+    "location": "Bareilly",
+    "summary": "This case has been updated successfully.",
+    "fullDetails": "Updated details of the robbery case.",
+    "victim": "Publicly shareable information",
+    "accused": "Public record information",
+    "timeline": "Updated investigation timeline.",
+    "evidence": "Updated CCTV and other evidence.",
+    "forensicAnalysis": "Updated forensic analysis.",
+    "courtVerdict": "Updated court verdict.",
+    "references": "Updated reference."
+}
+
+
+### DELETE CR003
+
+DELETE http://localhost:5000/api/cases/CR003

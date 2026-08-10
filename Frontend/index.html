@@ -1,0 +1,1917 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Forensic Crime Files</title>
+
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0d0d0d;
+    color: white;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 6%;
+
+    background: #111;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    color: #e63946;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+}
+
+nav a:hover {
+    color: #e63946;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.75),
+            rgba(0,0,0,0.88)
+        ),
+        url("https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1400&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    width: 90%;
+    max-width: 850px;
+}
+
+.small-title {
+    color: #e63946;
+    letter-spacing: 3px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin: 10px 0;
+}
+
+#typing {
+    color: #ddd;
+    font-size: 20px;
+    min-height: 30px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+#search {
+    width: 80%;
+    max-width: 650px;
+
+    margin-top: 30px;
+    padding: 16px 20px;
+
+    border: 1px solid #555;
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+#search::placeholder {
+    color: #aaa;
+}
+
+#search:focus {
+    border-color: #e63946;
+}
+
+
+/* =========================
+   COMMON SECTION
+========================= */
+
+.section {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 70px 0;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 32px;
+}
+
+.section-text {
+    text-align: center;
+    color: #aaa;
+
+    margin: 8px 0 35px;
+}
+
+
+/* =========================
+   CRIME CATEGORIES
+========================= */
+
+.category-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.category-card {
+    background: #171717;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    padding: 28px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #e63946;
+
+    box-shadow:
+        0 10px 30px
+        rgba(230,57,70,0.12);
+}
+
+.category-icon {
+    font-size: 32px;
+}
+
+.category-card h3 {
+    margin: 12px 0 6px;
+}
+
+.category-card p {
+    color: #999;
+    font-size: 14px;
+}
+
+
+/* =========================
+   NATIONAL / INTERNATIONAL
+========================= */
+
+.region-section {
+    display: none;
+
+    margin-top: 40px;
+
+    padding: 30px;
+
+    background: #111;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+}
+
+.region-section.active {
+    display: block;
+}
+
+.region-title {
+    text-align: center;
+
+    color: #e63946;
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+}
+
+.region-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.region-card {
+    padding: 30px;
+
+    background: #171717;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.region-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #e63946;
+}
+
+.region-card .icon {
+    font-size: 40px;
+}
+
+.region-card h3 {
+    margin-top: 10px;
+}
+
+.region-card p {
+    color: #999;
+    font-size: 14px;
+}
+
+
+/* =========================
+   TRENDING
+========================= */
+
+.trending-section {
+    background: #111;
+
+    border-top: 1px solid #292929;
+}
+
+.trending-box {
+    max-width: 900px;
+
+    margin: auto;
+
+    background: #171717;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    padding: 25px;
+}
+
+.trending-list {
+    padding-left: 25px;
+}
+
+.trending-list li {
+    padding: 14px 10px;
+
+    border-bottom: 1px solid #292929;
+
+    cursor: pointer;
+
+    color: #ddd;
+
+    transition: 0.2s;
+}
+
+.trending-list li:hover {
+    color: #e63946;
+
+    padding-left: 15px;
+}
+
+.trending-list li:last-child {
+    border-bottom: none;
+}
+
+.trending-title {
+    font-weight: bold;
+}
+
+.trending-meta {
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.88);
+
+    overflow-y: auto;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 850px;
+
+    margin: 60px auto;
+
+    padding: 35px;
+
+    background: #171717;
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    position: relative;
+}
+
+.close {
+    position: absolute;
+
+    right: 25px;
+    top: 15px;
+
+    font-size: 30px;
+
+    color: #aaa;
+
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #e63946;
+}
+
+.modal-content h2 {
+    color: #e63946;
+
+    margin-bottom: 20px;
+}
+
+.detail {
+    margin: 12px 0;
+
+    color: #ccc;
+}
+
+.detail strong {
+    color: white;
+}
+
+.detail-section {
+    margin-top: 25px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #333;
+}
+
+.detail-section h3 {
+    color: #e63946;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   LOADING / ERROR
+========================= */
+
+.loading {
+    text-align: center;
+
+    color: #aaa;
+
+    padding: 35px;
+}
+
+.error {
+    text-align: center;
+
+    color: #ff6b6b;
+
+    padding: 35px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 40px 20px;
+
+    background: #111;
+
+    border-top: 1px solid #333;
+}
+
+footer h3 {
+    color: #e63946;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #999;
+}
+
+.copyright {
+    margin-top: 15px;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0 7px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .category-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    #typing {
+        font-size: 16px;
+    }
+
+    #search {
+        width: 100%;
+    }
+
+    .category-container,
+    .region-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🛡️ Forensic Crime Files
+    </div>
+
+    <nav>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#categories">
+            Crime Categories
+        </a>
+
+        <a href="#trending">
+            Trending Cases
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+    class="hero"
+    id="home">
+
+    <div class="hero-content">
+
+        <p class="small-title">
+            PUBLIC CRIME CASE ARCHIVE
+        </p>
+
+        <h1>
+            Forensic Crime Files
+        </h1>
+
+        <p id="typing"></p>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search crime cases..."
+        >
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CRIME CATEGORIES
+========================= -->
+
+<section
+    class="section"
+    id="categories">
+
+    <h2>
+        Crime Categories
+    </h2>
+
+    <p class="section-text">
+        Select a category to explore National
+        and International cases.
+    </p>
+
+
+    <div class="category-container">
+
+
+        <!-- MURDER -->
+
+        <div
+            class="category-card"
+            onclick="openCategory('Murder')">
+
+            <div class="category-icon">
+                🔴
+            </div>
+
+            <h3>
+                Murder Cases
+            </h3>
+
+            <p>
+                Explore murder cases from around the world.
+            </p>
+
+        </div>
+
+
+        <!-- RAPE -->
+
+        <div
+            class="category-card"
+            onclick="openCategory('Rape')">
+
+            <div class="category-icon">
+                ⚖️
+            </div>
+
+            <h3>
+                Rape Cases
+            </h3>
+
+            <p>
+                Explore documented cases and investigations.
+            </p>
+
+        </div>
+
+
+        <!-- THEFT -->
+
+        <div
+            class="category-card"
+            onclick="openCategory('Theft / Robbery')">
+
+            <div class="category-icon">
+                💰
+            </div>
+
+            <h3>
+                Theft / Robbery
+            </h3>
+
+            <p>
+                Cases involving theft and robbery.
+            </p>
+
+        </div>
+
+
+        <!-- SUICIDE -->
+
+        <div
+            class="category-card"
+            onclick="openCategory('Suicide')">
+
+            <div class="category-icon">
+                🟡
+            </div>
+
+            <h3>
+                Suicide Cases
+            </h3>
+
+            <p>
+                Publicly documented cases and investigations.
+            </p>
+
+        </div>
+
+
+        <!-- CHILD ABUSE -->
+
+        <div
+            class="category-card"
+            onclick="openCategory('Child Abuse')">
+
+            <div class="category-icon">
+                🧒
+            </div>
+
+            <h3>
+                Child Abuse
+            </h3>
+
+            <p>
+                Cases involving child abuse and exploitation.
+            </p>
+
+        </div>
+
+
+        <!-- UNSOLVED -->
+
+        <div
+            class="category-card"
+            onclick="openCategory('Unsolved Cases')">
+
+            <div class="category-icon">
+                🔍
+            </div>
+
+            <h3>
+                Unsolved Cases
+            </h3>
+
+            <p>
+                Cases that remain unresolved.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         NATIONAL / INTERNATIONAL
+    ========================== -->
+
+    <div
+        class="region-section"
+        id="regionSection">
+
+        <h3
+            class="region-title"
+            id="regionTitle">
+
+            Select Region
+
+        </h3>
+
+
+        <div class="region-container">
+
+
+            <!-- NATIONAL -->
+
+            <div
+                class="region-card"
+                onclick="showCases('National')">
+
+                <div class="icon">
+                    🇮🇳
+                </div>
+
+                <h3>
+                    National
+                </h3>
+
+                <p>
+                    Explore cases from within the country.
+                </p>
+
+            </div>
+
+
+            <!-- INTERNATIONAL -->
+
+            <div
+                class="region-card"
+                onclick="showCases('International')">
+
+                <div class="icon">
+                    🌍
+                </div>
+
+                <h3>
+                    International
+                </h3>
+
+                <p>
+                    Explore cases from around the world.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     TRENDING CASES
+========================= -->
+
+<section
+    class="section trending-section"
+    id="trending">
+
+    <h2>
+        🔥 Trending Cases
+    </h2>
+
+    <p class="section-text">
+        Explore the most recently added cases.
+    </p>
+
+
+    <div class="trending-box">
+
+        <ol
+            class="trending-list"
+            id="trendingList">
+
+            <li>
+                Loading trending cases...
+            </li>
+
+        </ol>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CASE MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="caseModal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeModal()">
+
+            &times;
+
+        </span>
+
+
+        <div id="caseDetails">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        🛡️ Forensic Crime Files
+    </h3>
+
+    <p>
+        A student project for presenting
+        publicly available crime case information.
+    </p>
+
+    <p class="copyright">
+        © 2026 Forensic Crime Files
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+/* ==========================================
+   BACKEND
+========================================== */
+
+const API_URL =
+    "http://localhost:5000/api/cases";
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let cases = [];
+
+let selectedCategory = "";
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const searchBox =
+    document.getElementById(
+        "search"
+    );
+
+const trendingList =
+    document.getElementById(
+        "trendingList"
+    );
+
+const regionSection =
+    document.getElementById(
+        "regionSection"
+    );
+
+const regionTitle =
+    document.getElementById(
+        "regionTitle"
+    );
+
+
+/* ==========================================
+   TYPING EFFECT
+========================================== */
+
+const typingText =
+    "Explore Public Crime Records & Investigations";
+
+let typingIndex = 0;
+
+
+function typingEffect() {
+
+    const typing =
+        document.getElementById(
+            "typing"
+        );
+
+
+    if (
+        typingIndex <
+        typingText.length
+    ) {
+
+        typing.textContent +=
+            typingText[typingIndex];
+
+        typingIndex++;
+
+        setTimeout(
+            typingEffect,
+            60
+        );
+
+    }
+
+}
+
+
+typingEffect();
+
+
+/* ==========================================
+   GET CASES
+========================================== */
+
+async function fetchCases() {
+
+    try {
+
+        console.log(
+            "Connecting to:",
+            API_URL
+        );
+
+
+        const response =
+            await fetch(API_URL);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned " +
+                response.status
+            );
+
+        }
+
+
+        cases =
+            await response.json();
+
+
+        console.log(
+            "Cases received:",
+            cases
+        );
+
+
+        displayTrending(cases);
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Backend connection error:",
+            error
+        );
+
+
+        trendingList.innerHTML = `
+
+            <li style="color:#ff6b6b;">
+
+                ❌ Unable to connect
+                to the crime database.
+
+                <br><br>
+
+                ${error.message}
+
+            </li>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================
+   OPEN CATEGORY
+========================================== */
+
+function openCategory(category) {
+
+    selectedCategory =
+        category;
+
+
+    regionTitle.textContent =
+        category +
+        " Cases";
+
+
+    regionSection.classList.add(
+        "active"
+    );
+
+
+    regionSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+/* ==========================================
+   SHOW CASES
+========================================== */
+
+function showCases(region) {
+
+    let filteredCases =
+        [];
+
+
+    /*
+       CATEGORY FILTER
+    */
+
+    filteredCases =
+        cases.filter(
+            function(caseItem) {
+
+                return String(
+                    caseItem.category || ""
+                )
+                .toLowerCase()
+                .trim()
+                ===
+                selectedCategory
+                    .toLowerCase()
+                    .trim();
+
+            }
+        );
+
+
+    /*
+       REGION FILTER
+
+       This checks the "region"
+       field if you add it to MongoDB.
+
+       Example:
+
+       region: "National"
+
+       or
+
+       region: "International"
+    */
+
+    const regionCases =
+        filteredCases.filter(
+            function(caseItem) {
+
+                return String(
+                    caseItem.region || ""
+                )
+                .toLowerCase()
+                .trim()
+                ===
+                region
+                    .toLowerCase()
+                    .trim();
+
+            }
+        );
+
+
+    /*
+       TEMPORARY FALLBACK
+
+       If you haven't added
+       region to MongoDB yet,
+       National cases can be
+       identified using state.
+    */
+
+    if (
+        regionCases.length === 0 &&
+        region === "National"
+    ) {
+
+        filteredCases =
+            filteredCases.filter(
+                function(caseItem) {
+
+                    return (
+                        caseItem.state &&
+                        String(
+                            caseItem.state
+                        ).trim() !== ""
+                    );
+
+                }
+            );
+
+    }
+
+
+    else {
+
+        filteredCases =
+            regionCases;
+
+    }
+
+
+    /*
+       DISPLAY RESULT
+    */
+
+    if (
+        filteredCases.length === 0
+    ) {
+
+        alert(
+            `No ${region} ${selectedCategory} cases found.`
+        );
+
+        return;
+
+    }
+
+
+    displaySearchResults(
+        filteredCases
+    );
+
+}
+
+
+/* ==========================================
+   DISPLAY FILTERED CASES
+========================================== */
+
+function displaySearchResults(
+    caseList
+) {
+
+    /*
+       Instead of bringing back
+       the old "Latest Cases"
+       section, show the result
+       temporarily inside Trending.
+    */
+
+    trendingList.innerHTML = "";
+
+
+    caseList.forEach(
+        function(caseItem) {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+
+            li.innerHTML = `
+
+                <div class="trending-title">
+
+                    ${escapeHTML(
+                        caseItem.title
+                    )}
+
+                </div>
+
+                <div class="trending-meta">
+
+                    ${escapeHTML(
+                        caseItem.caseId
+                    )}
+
+                    •
+
+                    ${escapeHTML(
+                        caseItem.category
+                    )}
+
+                    •
+
+                    ${escapeHTML(
+                        caseItem.state ||
+                        caseItem.location ||
+                        ""
+                    )}
+
+                </div>
+
+            `;
+
+
+            li.onclick =
+                function() {
+
+                    viewCase(
+                        caseItem.caseId
+                    );
+
+                };
+
+
+            trendingList.appendChild(
+                li
+            );
+
+        }
+    );
+
+
+    
+
+}
+
+
+/* ==========================================
+   TRENDING CASES
+========================================== */
+
+function displayTrending(
+    caseList
+) {
+
+    trendingList.innerHTML = "";
+
+
+    if (
+        !caseList ||
+        caseList.length === 0
+    ) {
+
+        trendingList.innerHTML = `
+
+            <li>
+                No trending cases available.
+            </li>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+       Latest 5 cases are
+       treated as trending.
+    */
+
+    const trendingCases =
+        [...caseList]
+        .sort(
+            function(a,b) {
+
+                return (
+                    Number(
+                        b.year || 0
+                    )
+                    -
+                    Number(
+                        a.year || 0
+                    )
+                );
+
+            }
+        )
+        .slice(0,5);
+
+
+    trendingCases.forEach(
+        function(caseItem) {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+
+            li.innerHTML = `
+
+                <div class="trending-title">
+
+                    ${escapeHTML(
+                        caseItem.title
+                    )}
+
+                </div>
+
+                <div class="trending-meta">
+
+                    ${escapeHTML(
+                        caseItem.caseId
+                    )}
+
+                    •
+
+                    ${escapeHTML(
+                        caseItem.category
+                    )}
+
+                    •
+
+                    ${escapeHTML(
+                        caseItem.state ||
+                        caseItem.location ||
+                        ""
+                    )}
+
+                </div>
+
+            `;
+
+
+            li.onclick =
+                function() {
+
+                    viewCase(
+                        caseItem.caseId
+                    );
+
+                };
+
+
+            trendingList.appendChild(
+                li
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   VIEW CASE
+========================================== */
+
+async function viewCase(
+    caseId
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/${encodeURIComponent(caseId)}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Case not found"
+            );
+
+        }
+
+
+        const caseData =
+            await response.json();
+
+
+        const details =
+            document.getElementById(
+                "caseDetails"
+            );
+
+
+        details.innerHTML = `
+
+            <h2>
+
+                ${escapeHTML(
+                    caseData.title
+                )}
+
+            </h2>
+
+
+            <div class="detail">
+
+                <strong>
+                    Case ID:
+                </strong>
+
+                ${escapeHTML(
+                    caseData.caseId
+                )}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>
+                    Category:
+                </strong>
+
+                ${escapeHTML(
+                    caseData.category
+                )}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>
+                    Region:
+                </strong>
+
+                ${escapeHTML(
+                    caseData.region
+                )}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>
+                    Year:
+                </strong>
+
+                ${caseData.year}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>
+                    State:
+                </strong>
+
+                ${escapeHTML(
+                    caseData.state
+                )}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>
+                    Location:
+                </strong>
+
+                ${escapeHTML(
+                    caseData.location
+                )}
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Summary
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.summary
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Full Details
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.fullDetails
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Victim
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.victim
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Accused
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.accused
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Timeline
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.timeline
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Evidence
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.evidence
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Forensic Analysis
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.forensicAnalysis
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    Court Verdict
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.courtVerdict
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <h3>
+                    References
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        caseData.references
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "caseModal"
+        ).style.display =
+            "block";
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Unable to load case details."
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   CLOSE MODAL
+========================================== */
+
+function closeModal() {
+
+    document.getElementById(
+        "caseModal"
+    ).style.display =
+        "none";
+
+}
+
+
+/* ==========================================
+   CLOSE MODAL OUTSIDE
+========================================== */
+
+window.onclick =
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "caseModal"
+            );
+
+
+        if (
+            event.target === modal
+        ) {
+
+            closeModal();
+
+        }
+
+    };
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+searchBox.addEventListener(
+    "input",
+    function() {
+
+        const value =
+            searchBox.value
+                .toLowerCase()
+                .trim();
+
+
+        if (
+            value === ""
+        ) {
+
+            displayTrending(
+                cases
+            );
+
+            return;
+
+        }
+
+
+        const filtered =
+            cases.filter(
+                function(caseItem) {
+
+                    return (
+
+                        String(
+                            caseItem.title || ""
+                        )
+                        .toLowerCase()
+                        .includes(value)
+
+                        ||
+
+                        String(
+                            caseItem.category || ""
+                        )
+                        .toLowerCase()
+                        .includes(value)
+
+                        ||
+
+                        String(
+                            caseItem.state || ""
+                        )
+                        .toLowerCase()
+                        .includes(value)
+
+                        ||
+
+                        String(
+                            caseItem.location || ""
+                        )
+                        .toLowerCase()
+                        .includes(value)
+
+                        ||
+
+                        String(
+                            caseItem.caseId || ""
+                        )
+                        .toLowerCase()
+                        .includes(value)
+
+                        ||
+
+                        String(
+                            caseItem.year || ""
+                        )
+                        .includes(value)
+
+                    );
+
+                }
+            );
+
+
+        displaySearchResults(
+            filtered
+        );
+
+    }
+);
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHTML(
+    value
+) {
+
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ==========================================
+   LOAD DATA
+========================================== */
+
+fetchCases();
+
+</script>
+
+
+</body>
+
+</html>
