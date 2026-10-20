@@ -39,9 +39,9 @@ app.use(cors({
 app.use(express.json());
 
 
-// ==================================================
+// =========
 // DATABASE + SERVER START
-// ==================================================
+// ======
 
 async function startServer() {
 
